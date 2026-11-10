@@ -5,13 +5,13 @@ For each month and each account, find what share of all emails sent in that mont
 
 ## Two approaches to the same task
 
-### 1. Window functions: `email_sending_share_by_month.sql`
+### 1. Window functions:
 - Builds the sending date from the session date and the sent-date offset
 - Calculates the account's monthly share (%) with `COUNT() OVER(PARTITION BY ...)`
 - Finds first and last sent dates with `MIN() OVER()` and `MAX() OVER()`
 - Removes duplicates with `DISTINCT`
 
-### 2. CTEs + aggregation + view: `email_sending_share_by_month_view.sql`
+### 2. CTEs + aggregation + view:
 - Splits the logic into separate CTEs: base dates, emails per account per month, emails per month, first/last dates
 - Aggregates with `GROUP BY` and joins the CTEs together
 - Saves the result as a BigQuery `VIEW` so it can be reused in reports
